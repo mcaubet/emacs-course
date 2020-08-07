@@ -86,7 +86,7 @@
    A nice article by Mickey Petersen about the ido selection system (a bit
    advanced):
    https://www.masteringemacs.org/article/introduction-to-ido-mode  
-
+   
 ** TODO Understanding Emacs windows [0/6]
    Emacs is able to divide up its screen space into logical
    areas. They are called /windows/. It can do this even while running
@@ -162,12 +162,12 @@
    I will just list a few of the most important ones
 
    These are all standard key-combos
-   - "M-<" (beg-of-buffer) :: Jumps to the beginning of the buffer
-   - "M->" (end-of-buffer) :: Jumps to the end of the buffer
-   - "C-a" (move-beginning-of-line) :: move to beginning of line
-   - "C-e" (move-end-of-line) :: move to the end of the line
-   - "M-g g" (goto-line) :: go to a specific line number
-   - "M-g c" (goto-char) :: go to a specific character number within
+   - "M-<" (beg-of-buffer, std) :: Jumps to the beginning of the buffer
+   - "M->" (end-of-buffer, std) :: Jumps to the end of the buffer
+   - "C-a" (move-beginning-of-line, std) :: move to beginning of line
+   - "C-e" (move-end-of-line, std) :: move to the end of the line
+   - "M-g g" (goto-line, std) :: go to a specific line number
+   - "M-g c" (goto-char, std) :: go to a specific character number within
      the file
 
    Apart from these commands you can naturally use PageUp, PageDown to
@@ -296,7 +296,7 @@
 ** TODO Executing Emacs commands and getting information about them [0/4]
    Emacs has a huge number of commands and many of them are not bound to
    key combinations. Such commands can be entered after using the
-   standard key combo "M-x". In this configuration we have configured
+   standard key-combo "M-x" (execute-extended-command). In this configuration we have configured
    the package "smex" which makes the selection of commands much
    easier.
 
@@ -305,7 +305,7 @@
      allow you to enter e.g. the initials "ev", or you can type
      "emav", or "emacs-ver". <RETURN> selects the current command.
    - [ ] if you want to get information about a command in smex, you can
-     invoke the help system by using the key-combo "C-h f" (describe-function)
+     invoke the help system by using the standard key-combo "C-h f" (describe-function)
      while being in the smex selection dialog.
    - [ ] If you want to get information about a function written in
      the text of an Emacs buffer, you can use the same standard
@@ -327,18 +327,18 @@
 
 ** TODO Get help on the current mode [0/2]
    - [ ] Invoke the help for the current buffer's major mode by
-     using the standard key-combo "C-h m"
+     using the standard key-combo "C-h m" (describe-mode)
    - [ ] In the course's configuration I included a helm mode for fast
      finding keys of the current mode. This is one of the most
      efficient ways to find out what the current mode can do and what
      keymappings it has. Try the key-combo "<f5> d"
-     (helm-descbinds). You now can narrow down to commands.
-     Try to find how to "kill" a whole sentence: Just type "kill" and
-     "sent" and there you are.
+     (helm-descbinds). You now can narrow down to commands. Try to
+     find out how to "kill" a whole sentence in Emacs: Just type
+     "kill" and "sent" and there you are.
 ** TODO What does this key or combo do?
 
    - [ ] To find out what a certain key can do in the current context,
-     use the standard key-combo "C-h k". You are then prompted to
+     use the standard key-combo "C-h k" (describe-key). You are then prompted to
      enter the combo you're interested in. Try to find out what is
      mapped to the "C-c C-t" combination, i.e. you have to type "C-h k
      C-c C-t".
@@ -373,15 +373,16 @@
      type: g (emacs). Tab expansion is available
 
 ** TODO Get documentation about functions, commands, and variables [0/2]
-   Again, all standard key-combos for getting help start with "C-h"
-   - [ ] "C-h C-h" :: get help on help. You can leave the help buffer
+   Standard key-combos: All standard key-combos for getting help start
+   with "C-h"
+   - [ ] "C-h C-h" (help-for-help, std) :: get help on help. You can leave the help buffer
      by typing "q" for quit     
-   - "C-h f" (describe-function) :: get the function documentation of
+   - "C-h f" (describe-function, std) :: get the function documentation of
      an emacs function or interactive command. If point (your cursor)
      is located on a function name, it will already have that function
      preselected as default. Try it by placing your cursor on this and
      then typing "C-h f": describe-function.
-   - "C-h v" (describe-variable) :: Same as the previous one for variables.
+   - "C-h v" (describe-variable, std) :: Same as the previous one for variables.
      E.g. the currently active major modes is stored in a variable. Have
      a look at it: major-mode
 
@@ -593,8 +594,8 @@
      a task's lifetime. If I do not finish the task on Wednesday, I may reschedule
      it for working on it on Friday. But this will not affect the deadline!
    - [ ] Schedule a task. This you can do by using the standard
-     key-combo "C-c C-s" while you are in a task. A calendar will be
-     displayed. Within this calendar you move by
+     key-combo "C-c C-s" (org-schedule) while you are in a task. A
+     calendar will be displayed. Within this calendar you move by
      - <S-right>, <S-left>, <S-up>, <S-down> :: moves by days
      - <M-S-left>, <M-S-right> :: moves by months
      - <M-S-up>, <M-S-down> :: moves by years
@@ -645,8 +646,9 @@
      change it like in the previous task
    - [ ] for big changes one may want to use the calendar. Position
      the cursor on a timestamp and use these standard keycombos
-     - C-c . :: use calendar (leaves an active timestamp)
-     - C-c ! :: use calendar (leaves an inactive timestamp)
+     - "C-c ." (org-time-stamp) :: use calendar on timestamp (leaves an active timestamp).
+     - "C-c !" (org-time-stamp-inactive) :: use calendar on timestamp (leaves an
+       inactive timestamp).
    - [ ] the above key-combos can also be used to enter a new timestamp
      anywhere in an org file. Try it.
    - [ ] If you add the prefix argument "C-u" before one of the above
@@ -670,7 +672,7 @@
    correct. Else you need to adapt the path definition for
    org-directory in the [[file:~/.emacs.d/org-init.el::(setq org-directory "~/Documents/orgcourse/agenda/")][org-init.el]] configuration file.
    
-   - [ ] Use the key-combo "C-c a" to get to the agenda
+   - [ ] Use the key-combo "C-c a" (org-agenda) to get to the agenda
      menu. In the menu choose "a" for "agenda". You will get the
      default view of the agenda, which is the present week. All items
      that have an associated scheduled or deadline time (or an active
@@ -701,7 +703,7 @@
      you use the Emacs undo command ("C-_", it is also mapped to other
      keys), the change will be reverted in the agenda as well as in
      the Org file.
-   - [ ] Yoi can naturally also just use the standard key-combo "C-c C-s"
+   - [ ] You can naturally also just use the standard key-combo "C-c C-s"
      while you are on an agenda taks to change its scheduling, and "C-c C-d"
      if you want to change its deadline.
    - [ ] use "g" to rebuild the view (the overlays vanish)
